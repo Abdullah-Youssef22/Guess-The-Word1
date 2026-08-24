@@ -1,0 +1,343 @@
+/* ========================================
+   Global
+======================================== */
+
+body {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: black;
+}
+
+* {
+    color: #fff;
+}
+
+
+/* ========================================
+   Display
+======================================== */
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+
+/* ========================================
+   Colors
+======================================== */
+
+:root {
+    --in-place-color: Green;
+    --not-in-place-color: rgb(255, 233, 70);
+    --not-in-the-word-color: Red;
+}
+
+
+/* ========================================
+   Buttons
+======================================== */
+
+.btn {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
+    padding: 8px 13px;
+    font-size: 18px;
+}
+
+.btn:hover {
+    filter: brightness(1.35);
+}
+
+.btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+}
+
+.check {
+    background-color: rgb(0, 120, 32);
+    color: #fff;
+}
+
+.hint {
+    background-color: rgb(7, 145, 213);
+    color: white;
+}
+
+
+/* ========================================
+   Key Colors
+======================================== */
+
+.key-colord-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.color-block {
+    width: 15px;
+    height: 15px;
+}
+
+#in-place-color {
+    background-color: var(--in-place-color);
+}
+
+#not-in-place-color {
+    background-color: var(--not-in-place-color);
+}
+
+#not-corect-color {
+    background-color: var(--not-in-the-word-color);
+}
+
+
+/* ========================================
+   Level Selection
+======================================== */
+
+.form--selection-state {
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+
+    background-color: rgb(0, 0, 0);
+
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.level-selection-contaner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.level-selection__progress {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.from__btn {
+    width: 250px;
+    height: 40px;
+
+    background-color: rgb(4, 86, 158);
+    color: #fff;
+}
+
+.from__btn:hover {
+    filter: brightness(1.55);
+}
+
+#submit-level-form {
+    background-color: rgb(0, 120, 32);
+}
+
+.form--playing-state {
+    display: none;
+}
+
+.form__level-progress {
+    background-color: rgb(100, 5, 67);
+    color: #fff;
+}
+
+.reseat-a-level {
+    background-color: rgba(221, 14, 14, 0.674);
+    color: #fff;
+}
+
+.display-progres {
+    margin: 10px;
+
+    background-color: rgb(56, 2, 131);
+    color: #fff;
+}
+
+.display-progres:hover {
+    filter: brightness(1);
+}
+
+#reset-all-levels {
+    margin: 30px;
+}
+
+
+/* ========================================
+   Game
+======================================== */
+
+#game-section {
+    width: 100%;
+    justify-self: center;
+}
+
+.game-name {
+    width: 100%;
+    text-align: center;
+}
+
+.game-body {
+    width: 100%;
+    padding: 35px 70px;
+
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column-reverse;
+    justify-self: center;
+    align-items: center;
+    gap: 25px;
+}
+
+#left-side {
+    display: flex;
+    flex-direction: column;
+}
+
+#left-side * {
+    padding: 15px;
+}
+
+#mid {
+    padding: 35px;
+    background-color: #333;
+}
+
+#attempts-container {
+    padding: 20px;
+    background-color: #333;
+}
+
+
+/* ========================================
+   Inputs
+======================================== */
+
+.input {
+    width: 35px;
+    height: 35px;
+
+    text-align: center;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+
+/* ========================================
+   Winning & Losing
+======================================== */
+
+.ending-banners {
+    width: 60%;
+    margin: 20px;
+    padding: 15px;
+
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+
+    text-align: center;
+}
+
+#display-winning {
+    background-color: green;
+}
+
+#display-lossing {
+    background-color: rgba(165, 4, 4, 0.545);
+}
+
+.play-again {
+    width: 50%;
+
+    background-color: rgb(14, 54, 233);
+    color: #fff;
+
+    font-size: 20px;
+}
+
+
+/* ========================================
+   Hint
+======================================== */
+
+.hint-div--displayed {
+    width: 70%;
+    margin: 10px;
+    padding: 10px;
+
+    background-color: black;
+
+    font-size: 24px;
+
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media screen and (max-width: 764px) {
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .btn {
+        padding: 6px 10px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .btn {
+        padding: 6px 10px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    .level-selection-contaner {
+        flex-direction: row;
+    }
+
+    .game-body {
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}

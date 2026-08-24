@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Learn JavaScript</title>
+
+    <link rel="stylesheet" href="../CSS/style.css" />
+  </head>
+
+  <body>
+    <!-- Level Selection -->
+
+    <section id="level-selection">
+      <form action="submit" id="level-form" class="form--selection-state">
+        <div class="level-selection-contaner">
+          <button
+            type="button"
+            class="btn from__btn"
+            id="level-1-btn"
+            value="A1"
+          >
+            Level 1: A1
+          </button>
+
+          <div class="level-selection__progress">
+            <span class="btn display-progres level-1-progress"></span>
+
+            <button type="button" class="btn reseat-a-level" id="reset-level-1">
+              Reset level A1
+            </button>
+          </div>
+        </div>
+
+        <div class="level-selection-contaner">
+          <button
+            type="button"
+            class="btn from__btn"
+            id="level-2-btn"
+            value="A2"
+          >
+            Level 2: A2
+          </button>
+
+          <div class="level-selection__progress">
+            <span class="btn display-progres level-2-progress"></span>
+
+            <button type="button" class="btn reseat-a-level" id="reset-level-2">
+              Reset level A2
+            </button>
+          </div>
+        </div>
+
+        <div class="level-selection-contaner">
+          <button
+            type="button"
+            class="btn from__btn"
+            id="level-3-btn"
+            value="B1"
+          >
+            Level 3: B1
+          </button>
+
+          <div class="level-selection__progress">
+            <span class="btn display-progres level-3-progress"></span>
+
+            <button type="button" class="btn reseat-a-level" id="reset-level-3">
+              Reset level B1
+            </button>
+          </div>
+        </div>
+
+        <div class="level-selection-contaner">
+          <button
+            type="button"
+            class="btn from__btn"
+            id="level-4-btn"
+            value="B2"
+          >
+            Level 4: B2
+          </button>
+
+          <div class="level-selection__progress">
+            <span class="btn display-progres level-4-progress"></span>
+
+            <button type="button" class="btn reseat-a-level" id="reset-level-4">
+              Reset level B2
+            </button>
+          </div>
+        </div>
+
+        <div class="level-selection-contaner">
+          <button class="btn from__btn" id="submit-level-form" type="submit">
+            Start a round
+          </button>
+
+          <div class="level-selection__progress">
+            <button class="btn reseat-a-level" id="reset-all-levels">
+              Reset all levels
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Game Section -->
+
+    <section id="game-section">
+      <div>
+        <header class="game-name">
+          <h1 class="game-name">Guess The Word</h1>
+        </header>
+
+        <div class="game-body">
+          <div id="left-side">
+            <span class="btn display-progres level-1-progress"></span>
+            <span class="btn display-progres level-2-progress"></span>
+            <span class="btn display-progres level-3-progress"></span>
+            <span class="btn display-progres level-4-progress"></span>
+          </div>
+
+          <div id="mid">
+            <div id="attempts-container"></div>
+
+            <div>
+              <div class="btns">
+                <button class="btn check">Check The word</button>
+
+                <button id="hint-btn" class="btn hint">Hints</button>
+              </div>
+
+              <div id="hint-div" class="hint-div--displayed"></div>
+            </div>
+          </div>
+
+          <div id="right-side">
+            <h2>Key Colors</h2>
+
+            <div class="key-colord-row">
+              Litter is corect and in place
+              <div class="color-block" id="in-place-color"></div>
+            </div>
+
+            <div class="key-colord-row">
+              Litter is corect but not in place
+              <div class="color-block" id="not-in-place-color"></div>
+            </div>
+
+            <div class="key-colord-row">
+              Litter is not corect
+              <div class="color-block" id="not-corect-color"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Winning Banner -->
+
+    <div id="display-winning" class="ending-banners">
+      <h2>
+        Congratulations the word is:
+
+        <h1 class="Display-the-word"></h1>
+      </h2>
+
+      <span class="btn display-progres level-1-progress"></span>
+      <span class="btn display-progres level-2-progress"></span>
+      <span class="btn display-progres level-3-progress"></span>
+      <span class="btn display-progres level-4-progress"></span>
+
+      <button class="play-again btn">Play again</button>
+    </div>
+
+    <!-- Losing Banner -->
+
+    <div id="display-lossing" class="ending-banners">
+      <h2>
+        GG try again the word is:
+
+        <h1 class="Display-the-word"></h1>
+      </h2>
+
+      <span class="btn display-progres level-1-progress"></span>
+      <span class="btn display-progres level-2-progress"></span>
+      <span class="btn display-progres level-3-progress"></span>
+      <span class="btn display-progres level-4-progress"></span>
+
+      <button class="play-again btn">Play again</button>
+    </div>
+
+    <script type="module" src="/Guess The Word/JS/main.js"></script>
+  </body>
+</html>
