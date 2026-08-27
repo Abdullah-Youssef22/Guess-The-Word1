@@ -220,6 +220,26 @@ function resetAllLevels() {
     resetLevel("B2");
 }
 
+/* ========================================
+   Session Storage
+======================================== */
+
+const ROUND_KEY = "currentRound";
+function saveRound(round){
+    sessionStorage.setItem(ROUND_KEY,JSON.stringify(round));
+}
+
+function getRound(){
+    const data=sessionStorage.getItem(ROUND_KEY);
+    if (!data) {
+        return null;
+    }
+    return JSON.parse(data);
+}
+ 
+function deleteRound(){
+    sessionStorage.removeItem(ROUND_KEY);
+}
 
 /* ========================================
    Exports
@@ -229,5 +249,8 @@ export {
     getLevelData,
     newWordSolved,
     resetLevel,
-    resetAllLevels
+    resetAllLevels,
+    saveRound,
+    getRound,
+    deleteRound
 };

@@ -359,6 +359,38 @@ function displayLossingMassage(word) {
     wordElements[1].innerText = word;
 }
 
+/* ========================================
+    restoreAttempts
+======================================== */
+
+function restoreAttempts(attempts, currentAttempt) {
+    for (let i = 0; i < attempts.length; i++) {
+        const row = getAttemptRow(i);
+        const inputs = row.querySelectorAll("input");
+
+        for (let j = 0; j < inputs.length; j++) {
+            inputs[j].value = attempts[i].guess[j];
+            changeInputState(inputs[j], attempts[i].states[j]);
+            inputs[j].disabled = true;
+        }
+    }
+
+    const currentRow = getAttemptRow(currentAttempt);
+
+    if (currentRow) {
+        const inputs = currentRow.querySelectorAll("input");
+
+        inputs.forEach((input) => {
+            input.disabled = false;
+        });
+
+        if (inputs[0]) {
+            inputs[0].focus();
+            inputs[0].classList.add("foucsed-input");
+        }
+    }
+}
+
 
 /* ========================================
    Exports
@@ -376,5 +408,6 @@ export {
     getAttemptRow,
     displayWinningMassage,
     displayLossingMassage,
-    displayHints
+    displayHints,
+    restoreAttempts
 };

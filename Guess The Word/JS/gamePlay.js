@@ -2,7 +2,10 @@ import {
     getLevelData,
     newWordSolved,
     resetLevel,
-    resetAllLevels
+    resetAllLevels,
+    saveRound,
+    getRound,
+    deleteRound
 } from "./Storage.js";
 
 import {
@@ -17,7 +20,8 @@ import {
     getAttemptRow,
     displayWinningMassage,
     displayLossingMassage,
-    displayHints
+    displayHints,
+    restoreAttempts
 } from "./UI.js";
 
 
@@ -61,16 +65,53 @@ function randomWord(level) {
 ======================================== */
 
 function startRound(level) {
-    currentLevel = level;
-    currentWord = randomWord(level);
-    wordForHint = currentWord.split("");
-    currentAttempt = 0;
-    hints = 3;
+    const roundFromStorage = getRound();
+    if (roundFromStorage == null) {
 
-    PlayingScreen();
-    makeInputsForAWord(currentWord);
-    displayNumberOfHints(hints);
-    displayingProgressForAllLevels();
+        currentLevel = level;
+        currentWord = randomWord(level);
+        wordForHint = currentWord.split("");
+        currentAttempt = 0;
+        hints = 3;
+        const round = {
+            level: currentLevel,
+            word: currentWord,
+            attempts: [],
+            currentAttempt: 0,
+            hints: 3
+        };
+        saveRound(round);
+
+        PlayingScreen();
+        makeInputsForAWord(currentWord);
+        displayNumberOfHints(hints);
+        displayingProgressForAllLevels();
+        return;
+    }
+
+    else {
+        currentLevel = roundFromStorage.level;
+        currentWord = roundFromStorage.word;
+        wordForHint = currentWord.split("");
+        currentAttempt = roundFromStorage.currentAttempt;
+        hints = roundFromStorage.hints;
+        const levelData = getLevelData(currentLevel);
+        isWordAvailable = levelData.AVLSet.size !== 0;
+
+        if (isWordAvailable) {
+            indexGolbal = Array.from(levelData.AVLSet).indexOf(currentWord);
+        }
+
+        PlayingScreen();
+        makeInputsForAWord(currentWord);
+        restoreAttempts(
+            roundFromStorage.attempts,
+            currentAttempt
+        );
+        displayNumberOfHints(hints);
+        displayingProgressForAllLevels();
+    }
+
 }
 
 function finishRound() {
@@ -99,14 +140,25 @@ function checkWord(row, word) {
     const inputs = row.querySelectorAll("input");
     let valid = true;
 
+    const Tguess = [...inputs].map(input => input.value).join("");
+    let Tstatues = [];
+    const round = getRound();
+
     for (let i = 0; i < inputs.length; i++) {
         const state = checkLetter(inputs[i], i, word);
+        Tstatues.push(state);
         changeInputState(inputs[i], state);
         if (state !== 1) {
             valid = false;
         }
     }
 
+    round.attempts.push({
+        guess: Tguess,
+        states: Tstatues
+    })
+    round.currentAttempt++;
+    saveRound(round);
     return valid;
 }
 
@@ -123,6 +175,8 @@ function isAttemptComplete(row) {
 function checkCurrentAttempt() {
     const currentRow = getAttemptRow(currentAttempt);
 
+
+
     if (!isAttemptComplete(currentRow)) {
         return;
     }
@@ -135,6 +189,7 @@ function checkCurrentAttempt() {
         if (isWordAvailable) {
             newWordSolved(currentLevel, indexGolbal);
         }
+        deleteRound();
         displayWinningMassage(currentWord);
         finishRound();
 
@@ -148,12 +203,13 @@ function checkCurrentAttempt() {
 
     if (currentAttempt < 9) {
         currentAttempt++;
+
         changeAttempt(currentRow);
         return;
     }
 
     console.log("LOSE");
-
+    deleteRound();
     displayLossingMassage(currentWord);
     finishRound();
 
@@ -224,11 +280,12 @@ function setUpLevelForm() {
    Hints
 ======================================== */
 
+
 function useHints() {
     const hintButton = document.getElementById("hint-btn");
 
     hintButton.addEventListener("click", function () {
-        if (hints > 0) {
+        if (hints > 0 && wordForHint.length > 0) {
             const hintDiv = document.getElementById("hint-div");
             const index = Math.floor(Math.random() * wordForHint.length);
             const hint = wordForHint[index].toUpperCase();
@@ -236,10 +293,16 @@ function useHints() {
             hintDiv.innerText = `The word contains the letter (${hint})`;
             displayHints();
             hints--;
+            const round = getRound();
+            if (round) {
+                round.hints = hints;
+                saveRound(round);
+            }
             displayNumberOfHints(hints);
         }
     });
 }
+
 
 /* ========================================
    Reseting Buttons
@@ -274,18 +337,35 @@ function resetingBtns() {
     });
 }
 
+/* ========================================
+    restoreing round 
+======================================== */
+
+function restoreRound() {
+    const roundFromStorage = getRound();
+    if (roundFromStorage == null) {
+        startgame();
+    }
+    else {
+        const level = roundFromStorage.level;
+        startRound(level);
+    }
+
+}
+
 
 /* ========================================
    Application Start
 ======================================== */
 
-function intialization(){
+function intialization() {
     useHints();
     setupGameEvents();
     resetingBtns();
     setupInputBehavior();
     setUpLevelSelection();
     setUpLevelForm();
+    restoreRound();
 }
 
 function startgame() {
@@ -295,5 +375,4 @@ function startgame() {
 
 export {
     intialization,
-    startgame
 };

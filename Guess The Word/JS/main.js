@@ -1,3 +1,2 @@
-import { intialization,startgame } from "./gamePlay.js";
+import { intialization } from "./gamePlay.js";
 intialization();
-startgame();
